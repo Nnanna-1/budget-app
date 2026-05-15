@@ -51,3 +51,9 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
         raise HTTPException(status_code=401, detail="Invalid credentials")
     token = create_access_token(data={"sub": user.email})
     return {"access_token": token, "token_type": "bearer"}
+
+from app.oauth2 import get_current_user
+
+@router.get("/me", response_model=UserResponse)
+def get_me(current_user: User = Depends(get_current_user)):
+    return current_user
