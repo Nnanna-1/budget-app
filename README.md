@@ -1,24 +1,34 @@
 # Budget App
 
-A personal finance tracking application built using FastAPI, React, and DynamoDB.
+A personal finance tracking application built using React, FastAPI and PostgreSQL. Features smart onboarding, subscription management and a what-if financial planner.
 
 ## Features
 
-- Track income and expenses
+- User authentication with JWT tokens
 
-- Create and manage budgets
+- Smart onboarding - Set income, budgeting style (relaxed/balanced/aggressive) and savings goals
 
-- View spending insights
+- Track income and expenses by category
+
+- Budget Goal Progress tracking
+
+- Subscription tracker with waste detection
+
+- What-if financial planner with scenario modelling
+
+- Data visualisation with Recharts
 
 ## Technology Stack
 
-- React
+- React + Recharts
 
-- FastAPI
+- FastAPI(Python)
 
-- DynamoDB
+- PostgreSQL + SQL alchemy
 
-- Python
+- JWT authentication
+
+- Developed on Vercel (Frontend), Render (Backend), Supabase (Database)
 
 ## Current Status
 
@@ -26,10 +36,10 @@ Currently in development.
 
 ## Future Improvements
 
-- User authentication
+- PDF bank statement parsing - Upload statements and transactions automatically extracted
 
-- Budget alerts
+- Budget alerts and overspending notifications
 
-- Data visualisations
+- AI spending insights and pattern detection
 
-- Cloud deployment
+- Multi-currency support with exchange rate
