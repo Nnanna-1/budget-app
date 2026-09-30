@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import API from '../api'
 import AddTransaction from '../components/AddTransaction'
 import SpendingChart from '../components/SpendingChart'
+import GoalProgress from '../components/GoalProgress'
 
 function Dashboard() {
     const [profile, setProfile] = useState(null)
@@ -82,7 +83,8 @@ return (
                     </div>
                 </div>
             )}
-
+            
+            <GoalProgress transactions={transactions} profile={profile} />
             <SpendingChart transactions={transactions} />
 
             <AddTransaction onTransactionAdded={fetchTransactions} />
