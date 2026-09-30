@@ -38,6 +38,14 @@ function Dashboard() {
         logout()
         navigate('/login')
     }
+    const handleDelete = async (id) => {
+    try {
+        await API.delete(`/transactions/${id}`)
+        fetchTransactions()
+    } catch (err) {
+        console.error(err)
+    }
+}
 
     if (loading) return <div>Loading...</div>
 
@@ -81,19 +89,25 @@ return (
                 {transactions.length === 0 ? (
                     <p className="text-gray-400">No transactions yet</p>
                 ) : (
-                    <div className="space-y-3">
-                        {transactions.map(t => (
-                            <div key={t.id} className="bg-gray-900 border border-gray-800 rounded-lg px-5 py-4 flex justify-between items-center">
-                                <div>
-                                    <p className="font-medium">{t.category}</p>
-                                    <p className="text-gray-400 text-sm">{t.description || 'No description'}</p>
-                                </div>
+                    transactions.map(t => (
+                        <div key={t.id} className="bg-gray-900 border border-gray-800 rounded-lg px-5 py-4 flex justify-between items-center">
+                            <div>
+                                <p className="font-medium">{t.category}</p>
+                                <p className="text-gray-400 text-sm">{t.description || 'No description'}</p>
+                            </div>
+                            <div className="flex items-center gap-4">
                                 <p className={`text-lg font-bold ${t.transaction_type === 'income' ? 'text-green-400' : 'text-red-400'}`}>
                                     {t.transaction_type === 'income' ? '+' : '-'}£{t.amount}
                                 </p>
+                                <button
+                                    onClick={() => handleDelete(t.id)}
+                                    className="text-gray-600 hover:text-red-400 transition text-sm"
+                                >
+                                    Delete
+                                </button>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))
                 )}
             </div>
         </div>

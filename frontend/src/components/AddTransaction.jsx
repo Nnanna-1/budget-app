@@ -48,14 +48,22 @@ return (
                 className="bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 text-sm w-28"
                 required
             />
-            <input
-                type="text"
-                placeholder="Category"
+            <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 className="bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 text-sm w-36"
                 required
-            />
+            >
+                <option value="">Category</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Rent">Rent</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Subscriptions">Subscriptions</option>
+                <option value="Health">Health</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Other">Other</option>
+            </select>
             <input
                 type="text"
                 placeholder="Description (optional)"
