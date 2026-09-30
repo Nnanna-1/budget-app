@@ -41,31 +41,64 @@ function Dashboard() {
 
     if (loading) return <div>Loading...</div>
 
-    return (
-        <div>
-            <h1>Dashboard</h1>
-            <button onClick={handleLogout}>Logout</button>
+return (
+    <div className="min-h-screen bg-gray-950 text-white">
+        <nav className="bg-gray-900 border-b border-gray-800 px-6 py-4 flex justify-between items-center">
+            <h1 className="text-xl font-bold text-white">BudgetApp</h1>
+            <button 
+                onClick={handleLogout}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition"
+            >
+                Logout
+            </button>
+        </nav>
+
+        <div className="max-w-5xl mx-auto px-6 py-8">
             {profile && (
-                <div>
-                    <h2>Goal: {profile.goal_name}</h2>
-                    <p>Monthly income: £{profile.monthly_income}</p>
-                    <p>Savings goal: £{profile.savings_goal}</p>
-                    <p>Budgeting style: {profile.budgeting_style}</p>
+                <div className="bg-gray-900 rounded-xl p-6 mb-8 border border-gray-800">
+                    <h2 className="text-2xl font-bold mb-4">Goal: {profile.goal_name}</h2>
+                    <div className="grid grid-cols-3 gap-4">
+                        <div className="bg-gray-800 rounded-lg p-4">
+                            <p className="text-gray-400 text-sm">Monthly income</p>
+                            <p className="text-2xl font-bold text-green-400">£{profile.monthly_income}</p>
+                        </div>
+                        <div className="bg-gray-800 rounded-lg p-4">
+                            <p className="text-gray-400 text-sm">Savings goal</p>
+                            <p className="text-2xl font-bold text-blue-400">£{profile.savings_goal}</p>
+                        </div>
+                        <div className="bg-gray-800 rounded-lg p-4">
+                            <p className="text-gray-400 text-sm">Budgeting style</p>
+                            <p className="text-2xl font-bold text-purple-400 capitalize">{profile.budgeting_style}</p>
+                        </div>
+                    </div>
                 </div>
             )}
+
             <AddTransaction onTransactionAdded={fetchTransactions} />
-            <h2>Transactions</h2>
-            {transactions.length === 0 ? (
-                <p>No transactions yet</p>
-            ) : (
-                transactions.map(t => (
-                    <div key={t.id}>
-                        <p>{t.category} — £{t.amount} — {t.transaction_type}</p>
+
+            <div className="mt-8">
+                <h2 className="text-xl font-bold mb-4">Transactions</h2>
+                {transactions.length === 0 ? (
+                    <p className="text-gray-400">No transactions yet</p>
+                ) : (
+                    <div className="space-y-3">
+                        {transactions.map(t => (
+                            <div key={t.id} className="bg-gray-900 border border-gray-800 rounded-lg px-5 py-4 flex justify-between items-center">
+                                <div>
+                                    <p className="font-medium">{t.category}</p>
+                                    <p className="text-gray-400 text-sm">{t.description || 'No description'}</p>
+                                </div>
+                                <p className={`text-lg font-bold ${t.transaction_type === 'income' ? 'text-green-400' : 'text-red-400'}`}>
+                                    {t.transaction_type === 'income' ? '+' : '-'}£{t.amount}
+                                </p>
+                            </div>
+                        ))}
                     </div>
-                ))
-            )}
+                )}
+            </div>
         </div>
-    )
+    </div>
+)
 }
 
 export default Dashboard
